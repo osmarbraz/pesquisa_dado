@@ -295,8 +295,6 @@ public class Principal {
      * 
      * O(log n) Pois cada comparação reduz o número de possíveis 
      * candidatos por um fator de 2. 
-     * 
-     * T(n) = Theta(2n + 3) + O(2) = Theta(n)
      *
      * @param lista vetor com os dados armazenados
      * @param n quantidade de elementos da lista
@@ -315,9 +313,9 @@ public class Principal {
         int limSup = n;                                     //Theta(1)
         //Meio da lista
         int meio = 0;                                       //Theta(1)
-        while (limInf <= limSup) {                          //Theta(n/2)
-            meio = (limInf + limSup) / 2;                   //Theta(n/2)
-            if (chave < lista[meio]) {                      //Theta(n/2)
+        while (limInf <= limSup) {                          //Theta((n-1)/2)
+            meio = (limInf + limSup) / 2;                   //Theta((n-1)/2)
+            if (chave < lista[meio]) {                      //Theta((n-1)/2)
                 limSup = meio - 1;                          //O(1)
             } else {
                 if (chave > lista[meio]) {                  //O(1)
@@ -353,7 +351,6 @@ public class Principal {
      * O(log n) Pois cada comparação reduz o número de possíveis 
      * candidatos por um fator de 2. 
      * 
-     * 
      * @param lista vetor com os dados armazenados
      * @param limInf limite inferior de busca na lista.
      * @param limSup Limite superior de busca na lista.
@@ -367,7 +364,7 @@ public class Principal {
         } catch (InterruptedException e) {
         }
         int meio = 0;
-        if (limInf <= limSup) {                                                         //Theta(1)
+        if (limInf <= limSup) {                                                         //O(1)
             meio = (limInf + limSup) / 2;                                               //O(1)    
             if (chave < lista[meio]) {                                                  //O(1)    
                 return pesquisaBinariaRecursiva(lista, limInf, meio - 1, chave);        //Theta((n-1)/2)    
