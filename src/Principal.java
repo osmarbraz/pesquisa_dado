@@ -91,7 +91,8 @@ public class Principal {
      * Realiza a pesquisa lenta da chave na lista de dados.
      *
      * Complexidade de tempo. 
-     * T(n) = Theta(2n + 2) + O(n + 2) = Theta(n)
+     * T(n) = Theta(1) + Theta(n) + Theta(n) + O(n) + Theta(1) + O(1)
+     * T(n) = Theta(2n + 2) + O(n + 1) = Theta(n)
      *
      * @param lista vetor com os dados armazenados
      * @param n quantidade de elementos da lista
@@ -106,8 +107,8 @@ public class Principal {
 
         int posicao = -1;                                   //Theta(1)
         for (int i = 0; i < n; i++) {                       //Theta(n)
-            if (lista[i] == chave) {                        //Theta(n)
-                posicao = i;                                //O(n)
+            if (lista[i] == chave) {                        //n * Theta(1) = Theta(n)
+                posicao = i;                                //n * O(1) = O(n)
             }
             //Gera um atraso de 1 segundo no procedimento de busca
             try {
@@ -130,8 +131,15 @@ public class Principal {
     /**
      * Realiza a pesquisa da chave na lista de dados.
      *
-     * Complexidade de tempo.      
-     * T(n) = Theta(2n + 2) + O(2) = Theta(n)
+     * Complexidade de tempo no melhor caso.      
+     * T(n) = Theta(1) + Omega(2) + Omega(1) + Theta(1) + O(1)
+     * T(n) = Theta(2) + Omega(3) + O(1)
+     * T(n) = O(1)
+     * 
+     * Complexidade de tempo no pior caso.      
+     * T(n) = Theta(1) + O(2n) + O(n) + Theta(1) + O(1)
+     * T(n) = Theta(2) + O(3n + 1)
+     * T(n) = O(n)
      *
      * @param lista vetor com os dados armazenados
      * @param n quantidade de elementos da lista
@@ -145,8 +153,8 @@ public class Principal {
         long tempoInicio = Cronometro.tempoGasto();
 
         int i = 0;                                          //Theta(1)
-        while ((i < n) && (lista[i] != chave)) {            //Theta(n)
-            i = i + 1;                                      //Theta(n)
+        while ((i < n) && (lista[i] != chave)) {            //Omega(2) no melhor caso  e no pior caso O(n) pior caso
+            i = i + 1;                                      //Omega(2) no melhor caso  e no pior caso O(n) pior caso
             //Gera um atraso de 1 segundo no procedimento de busca
             try {
                 Thread.sleep(1);
@@ -169,8 +177,15 @@ public class Principal {
     /**
      * Realiza a pesquisa rápida da chave na lista de dados.
      *
-     * Complexidade de tempo. 
-     * T(n) = Theta(2n + 3) + O(2) = Theta(n)
+     * Complexidade de tempo no melhor caso.      
+     * T(n) = Theta(1) + Theta(1) + Omega(1) + Omega(1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + Omega(2) + O(1)
+     * T(n) = O(1)
+     * 
+     * Complexidade de tempo no pior caso.      
+     * T(n) = Theta(1) + Theta(1) + O(n+1) + O(n+1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + O(2n + 3)
+     * T(n) = O(n)
      *
      * @param lista vetor com os dados armazenados
      * @param n quantidade de elementos da lista
@@ -185,8 +200,8 @@ public class Principal {
 
         lista[n] = chave;                               // Theta(1)
         int i = 0;                                      // Theta(1)
-        while (lista[i] != chave) {                     // Theta(n)
-            i = i + 1;                                  // Theta(n)  
+        while (lista[i] != chave) {                     // Omega(1) no melhor caso e no pior caso O(n+1) pior caso            
+            i = i + 1;                                  // Omega(1) no melhor caso e no pior caso O(n+1) pior caso
             //Gera um atraso de 1 segundo no procedimento de busca
             try {
                 Thread.sleep(1);
@@ -207,7 +222,17 @@ public class Principal {
 
     /**
      * Realiza a pesquisa mais rápida da chave na lista de dados.
-     *
+     * 
+     * Complexidade de tempo no melhor caso.      
+     * T(n) = Theta(1) + Theta(1) + Omega(1) + Omega(1) + Omega(1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + Omega(3) + O(1)
+     * T(n) = O(1)
+     * 
+     * Complexidade de tempo no pior caso.      
+     * T(n) = Theta(1) + Theta(1) + O(n/2) + O(n/2) + O(1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + O(n + 2)
+     * T(n) = O(n) 
+     * 
      * Complexidade de tempo. 
      * T(n) = Theta(2n + 4) + O(2n + 2) = Theta(n)
      *
@@ -224,11 +249,11 @@ public class Principal {
 
         lista[n] = chave;                           // Theta(1) 
         int i = 0;                                  // Theta(1) 
-        while (lista[i] != chave) {                 // Theta(n)
-            if (lista[i + 1] != chave) {            // Theta(n)
-                i = i + 2;                          // O(n)
+        while (lista[i] != chave) {                 // Omega(1) no melhor caso  e no pior caso O(n/2) pior caso
+            if (lista[i + 1] != chave) {            // Omega(1) no melhor caso  e no pior caso O(n/2) pior caso
+                i = i + 2;                          // Omega(1) no melhor caso  e no pior caso O(n/2) pior caso
             } else {
-                i = i + 1;                          // O(n)
+                i = i + 1;                          // Omega(1) no melhor caso  e no pior caso O(1) pior caso
             }
             //Gera um atraso de 1 segundo no procedimento de busca
             try {
@@ -251,8 +276,15 @@ public class Principal {
     /**
      * Realiza a pesquisa ordenada da chave na lista de dados.
      *
-     * Complexidade de tempo. 
-     * T(n) = Theta(2n + 3) + O(2) = Theta(n)
+     * Complexidade de tempo no melhor caso.      
+     * T(n) = Theta(1) + Theta(1) + Omega(1) + Omega(1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + Omega(2) + O(1)
+     * T(n) = O(1)
+     * 
+     * Complexidade de tempo no pior caso.      
+     * T(n) = Theta(1) + Theta(1) + O(n+1) + O(n+1) + Theta(1) + O(1)
+     * T(n) = Theta(3) + O(2n + 3)
+     * T(n) = O(n)
      *
      * @param lista vetor com os dados armazenados
      * @param n quantidade de elementos da lista
@@ -268,8 +300,8 @@ public class Principal {
         //Pega o maior valor para um inteiro
         lista[n] = Integer.MAX_VALUE;                   // Theta(1) 
         int i = 0;                                      // Theta(1) 
-        while (lista[i] < chave) {                      // Theta(n)
-            i = i + 1;                                  // Theta(n)
+        while (lista[i] < chave) {                      // Omega(1) no melhor caso e no pior caso O(n+1) pior caso 
+            i = i + 1;                                  // Omega(1) no melhor caso e no pior caso O(n+1) pior caso 
             //Gera um atraso de 1 segundo no procedimento de busca
             try {
                 Thread.sleep(1);
@@ -291,7 +323,19 @@ public class Principal {
     /**
      * Realiza a pesquisa da chave na lista de dados.
      *
-     * Complexidade de tempo. 
+     * Complexidade de tempo no melhor caso.      
+     * T(n) = Theta(1) + Theta(1) + Theta(1) + Omega(1) + Omega(1) + Omega(1) + Omega(1) + O(1) + Theta(1) + O(1)
+     * T(n) = Theta(4) + Omega(4) + O(2)
+     * T(n) = O(2)
+     * 
+     * Complexidade de tempo no pior caso.      
+     * T(n) = Theta(1) + Theta(1) + Theta(1) + O((n-1)/2) + O((n-1)/2) + O((n-1)/2) + O(1) + Theta(1) + O(1)
+     * T(n) = Theta(4) + Omega(3(n-1)/2) + O(2)
+     * T(n) = O(1)
+     * 
+     * Aplicando o teorema master ou expansão telescópica para provar 
+     * por indução a complexidade temos:
+     * T(n) = O (log n)
      * 
      * O(log n) Pois cada comparação reduz o número de possíveis 
      * candidatos por um fator de 2. 
@@ -313,16 +357,16 @@ public class Principal {
         int limSup = n;                                     //Theta(1)
         //Meio da lista
         int meio = 0;                                       //Theta(1)
-        while (limInf <= limSup) {                          //Theta((n-1)/2)
-            meio = (limInf + limSup) / 2;                   //Theta((n-1)/2)
-            if (chave < lista[meio]) {                      //Theta((n-1)/2)
-                limSup = meio - 1;                          //O(1)
+        while (limInf <= limSup) {                          //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
+            meio = (limInf + limSup) / 2;                   //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
+            if (chave < lista[meio]) {                      //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
+                limSup = meio - 1;                          //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
             } else {
-                if (chave > lista[meio]) {                  //O(1)
-                    limInf = meio + 1;                      //O(1)
+                if (chave > lista[meio]) {                  //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
+                    limInf = meio + 1;                      //Omega(1) no melhor caso e no pior caso O((n-1)/2) pior caso
                 } else {
                     //Transforma o limite inferior maior que o superior para sair do laço
-                    limInf = limSup + 1;                    //O(1)    
+                    limInf = limSup + 1;                    //Omega(1) no melhor caso e no pior caso O(1) pior caso    
                 }
             }
             //Gera um atraso de 1 segundo no procedimento de busca
@@ -346,15 +390,23 @@ public class Principal {
     /**
      * Realiza a pesquisa da chave na lista de dados.
      *
+     * pesquisaBinariaRecursiva = Theta((n-1)/2)
+     * 
      * Complexidade de tempo. 
+     * T(n) = Theta(1) + Theta(1) + O(1) + O(1) + Theta((n-1)/2) + O(1)
+     * T(n) = Theta(2) + O(3) + Theta((n-1)/2) 
+     * 
+     * Aplicando o teorema master ou expansão telescópica para provar 
+     * por indução a complexidade temos:
+     * T(n) = O (log n)
      * 
      * O(log n) Pois cada comparação reduz o número de possíveis 
      * candidatos por um fator de 2. 
      * 
-     * @param lista vetor com os dados armazenados
+     * @param lista vetor com os dados armazenados.
      * @param limInf limite inferior de busca na lista.
      * @param limSup Limite superior de busca na lista.
-     * @param chave valor a ser procurado na lista
+     * @param chave valor a ser procurado na lista.
      * @return a posição da chave no vetor ou -1 se não encontrou.
      */
     public static int pesquisaBinariaRecursiva(int lista[], int limInf, int limSup, int chave) {
@@ -363,8 +415,8 @@ public class Principal {
             Thread.sleep(1);
         } catch (InterruptedException e) {
         }
-        int meio = 0;
-        if (limInf <= limSup) {                                                         //O(1)
+        int meio = 0;                                                                   //Theta(1)
+        if (limInf <= limSup) {                                                         //Theta(1)
             meio = (limInf + limSup) / 2;                                               //O(1)    
             if (chave < lista[meio]) {                                                  //O(1)    
                 return pesquisaBinariaRecursiva(lista, limInf, meio - 1, chave);        //Theta((n-1)/2)    
