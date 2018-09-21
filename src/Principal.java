@@ -19,7 +19,7 @@ public class Principal {
     /**
      * Lista os dados da lista.
      *
-     * @param lista Lista para exibir os dados.
+     * @param lista Lista dos Nós.
      * @param n Quantidade de Nós da lista.
      * @return Uma String com os dados da lista.
      */
@@ -38,18 +38,18 @@ public class Principal {
     /**
      * Inserir em posição especifica.
      *
-     * @param lista Lista dos elementos.
+     * @param lista Lista dos Nós.
      * @param k Posição de inserção.
-     * @param novo Novo elemento a ser inserido.
+     * @param valor Um novo valor de um nó a ser inserido na lista.
      * @return Retorna verdadeiro ou falso.
      */
-    public static boolean inserir(int lista[], int k, int novo) {
+    public static boolean inserir(int lista[], int k, int valor) {
         if (n < TAMANHO) {
             if ((k >= 0) && (k <= n)) {
                 for (int i = n - 1; i >= k; i--) {
                     lista[i + 1] = lista[i];
                 }
-                lista[k] = novo;
+                lista[k] = valor;
                 n = n + 1;
                 return true;
             } else {
@@ -65,18 +65,18 @@ public class Principal {
     /**
      * Inserção ordenada de elementos na lista.
      *
-     * @param lista Lista de elementos.
-     * @param novo Valor de um novo elemento a ser inserido na lista.
+     * @param lista Lista dos Nós.
+     * @param valor Um novo valor de um nó a ser inserido na lista.
      * @return Verdadeiro o falso se conseguiu realizar a inclusão.
      */
-    public static boolean inserirOrdenado(int lista[], int novo) {
+    public static boolean inserirOrdenado(int lista[], int valor) {
         if (n < TAMANHO) {
             int i = 0;
-            while ((i < n) && (novo > lista[i])) {
+            while ((i < n) && (valor > lista[i])) {
                 i = i + 1;
             }
             if (i <= n) {
-                return inserir(lista, i, novo);
+                return inserir(lista, i, valor);
             } else {
                 System.out.print("Posição Inválida!");
                 return false;
@@ -482,7 +482,7 @@ public class Principal {
      *
      * @return A quantidade de Nós da lista.
      */
-    public static int getN() {
+    public static int getQuantidade() {
         return n;
     }
 
@@ -601,7 +601,7 @@ public class Principal {
                     for (int i = 0; i < TAMANHO; i++) {
                         inserirOrdenado(lista, (int) (Math.random() * 100));
                     }
-                    JOptionPane.showMessageDialog(null, "Gerado " + getN() + " elementos na lista");
+                    JOptionPane.showMessageDialog(null, "Gerado " + getQuantidade() + " elementos na lista");
                 }
             }
         }
